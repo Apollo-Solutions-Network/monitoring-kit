@@ -1,0 +1,21 @@
+services:
+  zabbix-web:
+    image: zabbix/zabbix-web-nginx-pgsql:alpine-7.0-latest
+    container_name: zabbix-web
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      ZBX_SERVER_HOST: zabbix-server
+      DB_SERVER_HOST: zabbix-db
+      POSTGRES_USER: zabbix
+      POSTGRES_PASSWORD: zabbix123
+      POSTGRES_DB: zabbix_db
+      PHP_TZ: America/Sao_Paulo
+    networks:
+      - zabbix_net
+
+networks:
+  zabbix_net:
+    external: true
+

@@ -1,0 +1,15 @@
+# Evita subir dados sensíveis e temporários
+*.env
+*.log
+*.tar.gz
+*.zip
+
+# Volumes e dados dos containers
+postgres/
+data/
+netbox-media/
+netbox-static/
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db

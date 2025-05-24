@@ -1,0 +1,17 @@
+services:
+  zabbix-db:
+    image: postgres:17
+    container_name: zabbix-db
+    restart: always
+    environment:
+      POSTGRES_USER: zabbix
+      POSTGRES_PASSWORD: zabbix123
+      POSTGRES_DB: zabbix_db
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    networks:
+      - zabbix_net
+
+networks:
+  zabbix_net:
+    external: true

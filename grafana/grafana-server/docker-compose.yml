@@ -1,0 +1,31 @@
+services:
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: grafana-server
+    restart: always
+    user: "472"  # Usuário padrão do Grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_DATABASE_TYPE=postgres
+      - GF_DATABASE_HOST=grafana-db  # Nome do container do banco
+      - GF_DATABASE_PORT=5432
+      - GF_DATABASE_NAME=grafana
+      - GF_DATABASE_USER=grafana
+      - GF_DATABASE_PASSWORD=grafana123
+      - GF_INSTALL_PLUGINS=alexanderzobnin-zabbix-app
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin123
+    volumes:
+      - grafana-storage:/var/lib/grafana
+      - grafana-plugins:/var/lib/grafana/plugins
+    networks:
+      - zabbix_net
+
+volumes:
+  grafana-storage:
+  grafana-plugins:
+
+networks:
+  zabbix_net:
+    external: true
